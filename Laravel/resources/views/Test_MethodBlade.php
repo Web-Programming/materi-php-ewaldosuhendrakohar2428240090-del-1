@@ -9,11 +9,11 @@
 </form>
 <form action="/update2/2"method="POST">
     @csrf
-    @method('put')
+    @method('patch')
     <button type="Submit">Update Data(PATCH)</button>
 </form>
 <form action="hapus/1"method="POST">
     @csrf
-    @method('put')
+    @method('DELETE')
     <button type="Submit">Hapus Data(delete)</button>
 </form>
