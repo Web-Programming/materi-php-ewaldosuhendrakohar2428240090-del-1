@@ -72,3 +72,17 @@ Route::delete('/hapus/{id}', function($id){
 Route::get('/test-method', function(){
     return view('test_method');
 });
+
+route::get('/produk/',function(){
+    return view('produk.index');
+});
+
+route::get('/produk/create',function(){
+    return view('produk.create');
+});
+route::get('/produk/search',function(){
+    return view('produk.search');
+});
+route::get('/produk/detail',function(){
+    return view('produk.detail');
+});
