@@ -47,9 +47,7 @@
                         </td>
                     </tr>
                 @endforeach
-            </div>
             
-            Konten biasa di tambahkan
         </div>
     </div>
 @endsection
