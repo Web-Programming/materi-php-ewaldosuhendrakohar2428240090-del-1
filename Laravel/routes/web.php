@@ -86,3 +86,6 @@ route::get('/produk/search',function(){
 route::get('/produk/detail',function(){
     return view('produk.detail');
 });
+use app/http/controlers/productcontroler;
+route::resource('/product',productcontroler :: class);
+route::get('/produk/search',productControler::class.'@search');
