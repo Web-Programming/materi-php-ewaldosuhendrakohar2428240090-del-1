@@ -30,9 +30,28 @@
                         </td>
                     </tr>
                 @endfor
+                @foreach ($products as $item)
+                    </tr>
+                </thead>
+
+                <tbody>
+                @for ($i = 0; $i < count($products); $i++)
+                    <tr>
+                    <td>({ $loop->iteration})</td>  
+                    <td>({ $iproduct[$i]['name'] })</td>
+                    <td>Rp({ number_format($products[$i][price], 0, ',', '.')})</td>
+                    <td>
+                        <a href="{{ url('/produk/' . $products[$i]['id']) }}" class="btn btn-sm btn-info">Detail</a>
+                        <a href="{{ url('/produk/' . $products[$i]['id']) . '/edit' }}" 
+                            class="btn btn-sm btn-primay">Edit</a>
+                        </td>
+                    </tr>
+                @endforeach
             </div>
             
             Konten biasa di tambahkan
         </div>
     </div>
 @endsection
+    
+@endforeach
