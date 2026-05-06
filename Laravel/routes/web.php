@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 //Route ke halaman utama (home)
 Route::get('/', function () {
-    echo "Hallo, Nama Saya Pak JR";
+    echo "Hallo, Nama Saya Domi";
     //return view('welcome');
 });
 //Route ke halaman alamat
