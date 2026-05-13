@@ -4,17 +4,18 @@ use Illuminate\Support\Facades\Route;
 
 //Route ke halaman utama (home)
 Route::get('/', function () {
-    echo "Hallo, Nama Saya Domi";
+    echo "hallo nama saya seven";
     //return view('welcome');
 });
+
 //Route ke halaman alamat
-Route::get('/alamat', function(){
+Route::get('/alamat', function () {
     echo "Jalan Rajawali 14. Palembang";
 });
 
-//Route ke halaman path1/path2/detail
-Route::get('/path1/path2/detail', function(){
-    echo "Jalan Rajawali 14";
+//Route ke halaman alamat
+Route::get('/path1/path2/detail', function () {
+    echo "Jalan Rajawali 14. Palembang";
     echo "<br>";
     echo "Rt. 01 Rw. 02";
     echo "<br>";
@@ -40,7 +41,7 @@ Route::get('/user3/{name?}', function($name = 'Tamu'){
     echo "User Name: " . $name;
 });
 
-//Route Dinamis dengan parameter nama dan id
+//Route Dinamis degnan parameter nama dan id
 Route::get('/user4/{id}/{name}', function($id, $name){
     echo "User ID: " . $id;
     echo "<br>";
@@ -48,7 +49,7 @@ Route::get('/user4/{id}/{name}', function($id, $name){
 });
 
 //Router dengan metode POST
-Route::post('/simpan', function(){
+Route::get('/simpan', function(){
     echo "Data berhasil disimpan";
 });
 
@@ -62,31 +63,31 @@ Route::patch('/update2/{id}', function($id){
     echo "Data berhasil diperbarui dengan ID: " . $id;
 });
 
-//Router dengan metode DELETE
+//Router dengan metode PUT
 Route::delete('/hapus/{id}', function($id){
     echo "Data berhasil dihapus dengan ID: " . $id;
 });
 
-//Route untuk menampilkan halaman test_method
+//Router untuk menampilkan halaman test_method
 Route::get('/test-method', function(){
     return view('test_method');
 });
 
-//Manampilkan halaman profil
+//Router untuk menampilkan halaman profil
 Route::get('/profil', function(){
-    return view("profile");
+    return view('profile');
 });
 
-//Gunakan . untuk memisahkan folder dgn view
-// Route::get('/detailproduk', function(){
-//     return view("produk.detail");
-// });
+//Gunakan . untuk memisahkan folder dengan view
+Route::get('/detailproduk', function(){
+    return view('produk.detail');
+});
 
-//mengirim data ke view
+// //mengirim data ke view
 // Route::get('/detailproduk/{name}', function($name){
-//     return view("produk.detail", 
+//     return view('produk.detail', 
 //         ['product_name' => $name, 
-//         'id'=> 101, 
+//         'id' => 101,
 //         'color' => 'Silver',
 //         'stock' => 12
 //         ]
@@ -96,26 +97,31 @@ Route::get('/profil', function(){
 // Route::get('/produk/', function(){
 //     return view('produk.index');
 // });
+
 // Route::get('/produk/create', function(){
 //     return view('produk.create');
 // });
+
 // Route::get('/produk/search', function(){
 //     return view('produk.search');
 // });
+
 // Route::get('/produk/detail', function(){
 //     return view('produk.detail');
 // });
 
 use App\Http\Controllers\ProductController;
-//php artisan make:controller ProductController --resource
+//php artisan make:controller ProductController -resource
 Route::resource('/produk', ProductController::class);
 Route::get('/produk/search', ProductController::class.'@search');
+Route::get('/produk/detail', ProductController::class.'@detail');
 
-//Suplier
 // Route::get('/supplier/', function(){
 //     return view('supplier.index');
 // });
 
-//php artisan make:controller SupplierController --resource
 use App\Http\Controllers\SupplierController;
+//php artisan make:controller SupplierController -resource
 Route::resource('/supplier', SupplierController::class);
+Route::get('/supplier/search', SupplierController::class.'@search');
+Route::get('/supplier/detail', SupplierController::class.'@detail');
