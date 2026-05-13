@@ -12,6 +12,7 @@ class ProductController extends Controller
      */
     public function index()
     {
+
         $title = "Daftar Produk";
         // $products = [
         //     ['id' => 1, 'name' => 'Laptop', 'price' => 7500000],
@@ -44,11 +45,15 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate(['name', 'price', 'description', 'status', 'is_active', 'release_date']); // validasi input
-        $validated['is_active'] = $request->has('is_active') ? 1 : 0; // tangani checkbox
-        Product::create($validated); // simpan ke DB
-        return redirect()->route('produk.index')
-        ->with('success', 'Produk berhasil ditambahkan.');
+        $request->validate([
+        'name' => 'required|string|max:100',
+        'price' => 'required|numeric|min:0',
+        'description' => 'nullable|string',
+        'status' => 'required|in:new,used',
+        'is_active' => 'nullable|boolean',
+        'release_date' => 'nullable|date',
+        ]);
+        
     }
 
     /**
