@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory; //manual
 use Illuminate\Database\Eloquent\Model;
 
+#[usepolicy(ProductPolicy::class)]
 class Product extends Model
 {
     use HasFactory;

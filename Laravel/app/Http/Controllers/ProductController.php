@@ -11,7 +11,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        gate::authorize('viewAny', Product::class);
+        $title = 'Daftar Produk';
+        $products = Product::paginate(10);
     }
 
     /**
@@ -19,7 +21,10 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        gate::authorize('viewAny', Product::class);
+        $title = 'Daftar Produk';
+        $products = Product::paginate(10);
+
     }
 
     /**
@@ -27,7 +32,9 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        gate::authorize('create-product');
+        $title = 'Tambah Produk';
+        return view('products.create', compact('title'));
     }
 
     /**
@@ -35,7 +42,7 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $title = 'Detail Produk';
     }
 
     /**
