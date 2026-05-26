@@ -2,26 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Barang;
 use Illuminate\Http\Request;
-use App\Models\Produk; // Pastikan model Barang sudah dibuat
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
     public function index()
     {
         // Mengambil data analitik untuk kartu statistik
-        $totalBarang = Produk::count();
-        $barangTersedia = Produk::where('status', 'Tersedia')->count();
-        $barangHabis = Produk::where('status', 'Habis')->count();
-        $totalPendapatan = Produk::sum('harga'); 
-        
-        $barangTerbaru = Produk::latest()->take(5)->get();
+        $totalBarang = Barang::count();
+        $barangTersedia = Barang::where('status', 'Tersedia')->count();
+        $barangHabis = Barang::where('status', 'Habis')->count();
+        $nilaiStok = Barang::sum(DB::raw('harga * jumlah'));
+
+        $barangTerbaru = Barang::latest()->take(5)->get();
 
         return view('dashboard', compact(
-            'totalBarang', 
-            'barangTersedia', 
-            'barangHabis', 
-            'totalPendapatan', 
+            'totalBarang',
+            'barangTersedia',
+            'barangHabis',
+            'nilaiStok',
             'barangTerbaru'
         ));
     }

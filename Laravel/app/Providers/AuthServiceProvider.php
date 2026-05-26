@@ -2,10 +2,21 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\ServicesProvider; 
+use App\Models\User;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
+
 class AuthServiceProvider extends ServiceProvider
 {
+    /**
+     * The policy mappings for the application.
+     *
+     * @var array<class-string, class-string>
+     */
+    protected $policies = [
+        // 'App\\Models\\Model' => 'App\\Policies\\ModelPolicy',
+    ];
+
     /**
      * Register services.
      */
@@ -19,22 +30,26 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // untuk mengelola produk hanya dilakukan oleh admin
-        gate::define('Manage-Products', function ($user) {
+        $this->registerPolicies();
+
+        // Untuk mengelola product hanya dilakukan oleh admin
+        Gate::define('manage-products', function (User $user) {
             return $user->role === 'admin';
         });
-        // untuk mengupdate produk hanya dilakukan oleh admin atau sales
-        gate::define('update-Products', function (user $user) {
+
+        // Untuk update product dapat dilakukan oleh admin dan sales
+        Gate::define('update-product', function (User $user) {
             return $user->role === 'admin' || $user->role === 'sales';
         });
-        // untuk menghapus produk hanya dilakukan oleh admin
-        gate::define('delete-Products', function (user $user) {
+
+        // Untuk menghapus product hanya dilakukan oleh admin
+        Gate::define('delete-product', function (User $user) {
             return $user->role === 'admin';
         });
-        // untuk membuat produk hanya dilakukan oleh user yang sudah login
-        gate::define('create-Products', function (user $user) {
-            return $user === 'sales';
+
+        // Untuk membuat product dapat dilakukan oleh user yang sudah login
+        Gate::define('create-product', function (User $user) {
+            return $user->role === 'sales';
         });
-        
-}
+    }
 }

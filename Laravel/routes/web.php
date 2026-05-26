@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BarangController;
 use App\Http\Controllers\DashboardController;
 
 //Route ke halaman utama (home)
@@ -139,11 +140,11 @@ Route::post('/logout', [AuthController::class, 'logout'])
 // Semua route di dalam group ini hanya bisa diakses jika sudah login
 Route::middleware('auth')->group(function () {
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-Route::get('/barang', [BarangController::class, 'index']);
+Route::get('/barang', [BarangController::class, 'index'])->name('Produk.index');
 Route::get('/barang/create', [BarangController::class, 'create']);
 Route::get('/barang/{id}', [BarangController::class, 'show']);
 Route::get('/barang/edit/{id}', [BarangController::class, 'edit']);
-Route::post('/barang', [BarangController::class, 'store']);
+Route::post('/barang', [BarangController::class, 'store'])->name('product.store');
 Route::put('/barang/update/{id}', [BarangController::class, 'update']);
 Route::delete('/barang/{id}', [BarangController::class, 'destroy']);
 //Daftarkan Route Lainnya di Sini :

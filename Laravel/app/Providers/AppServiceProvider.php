@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,7 +20,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        paginator::useBootstrapFive();
-        gate::policy(Product::class, ProductPolicy::class);
+        // paginator::useBootstrapFive();
+        // gate::policy(Product::class, ProductPolicy::class);
+        Paginator::useBootstrapFive();
     }
 }
